@@ -4,6 +4,7 @@ import { AuthContext } from '../AuthContext/AuthContext';
 import { auth } from '../Firebase/firebase.init';
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
+import { updateProfile } from 'firebase/auth';
 
 
 
@@ -18,6 +19,8 @@ const Register = () => {
      const handleLoginWithGoogle = () => {
     LogInWithGoogle()
       .then((res) => {
+
+        
         console.log(res.user);
         setUser(res.user);
       })
@@ -29,9 +32,12 @@ const Register = () => {
   // Email registration
 
   const handleEmailRegistration=(e)=>{
+    
     e.preventDefault()
+      const name = e.target.name.value;   
     const email=e.target.email.value
     const password=e.target.password.value
+    const photo=e.target.photo.value
     console.log(email, password);
 
  const passwordRegex =
@@ -43,6 +49,12 @@ const Register = () => {
   }
 
     registerWithEmail(email,password).then(res=>{
+      const user=res.user;
+
+        updateProfile(user,{
+          displayName:name,
+          photoURL:photo
+        })
       console.log(res.user);
       
     }).catch(err=>{

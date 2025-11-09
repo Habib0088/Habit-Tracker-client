@@ -4,6 +4,8 @@ import { AuthContext } from '../AuthContext/AuthContext';
 
 const Nav = () => {
   const {user,logOutGoogle}=use(AuthContext)
+  console.log(user);
+  
   const handleLogOut=()=>{
 logOutGoogle().then(res=>{
   console.log(res);
@@ -30,8 +32,9 @@ logOutGoogle().then(res=>{
   </>
   const userLinks=<>
    {user? <>
-      <li><a>Name</a></li>
-      <li><a>Email</a></li>
+      <li><a>{user?.displayName
+}</a></li>
+      <li><a>{user?.email}</a></li>
       <li onClick={handleLogOut}><a>LogOut</a></li> </>
   
    :
@@ -58,7 +61,7 @@ logOutGoogle().then(res=>{
     <a className="btn btn-ghost text-sm lg:text-xl font-extrabold">Habit Tracker</a>
   </div>
   <div className="navbar-center hidden lg:flex">
-    <ul className="menu menu-horizontal px-1">
+    <ul className="menu menu-horizontal px-1 mr-6">
      {links}
     </ul>
   </div>
@@ -67,11 +70,15 @@ logOutGoogle().then(res=>{
      <ul className="menu menu-horizontal px-1">
     
       <li>
+        {
+          user?null: <button><Link to='/login'>LogIn</Link></button>
+        }
         <details>
-          <summary><Link to='/login'>{
-user?<button className=''><img className='w-12 h-12 rounded-full' src="https://lh3.googleusercontent.com/a/ACg8ocLsZ9mGJlENe7WIefOmyFuFmR0M9QK7tujrsDAqKfYJVwhljp7T=s96-c" alt="" /></button>: <button>LogIn</button> 
-}</Link></summary>
-          <ul className="p-2 bg-cyan-300 font-semibold">
+          <summary>{
+user?<button className=''><img className='w-12 h-12 rounded-full' src={user?.photoURL
+} alt="Photo" /></button>: null
+}</summary>
+          <ul className="p-2 bg-cyan-300 font-semibold -m-36 mt-4">
            {userLinks}
           </ul>
         </details>
