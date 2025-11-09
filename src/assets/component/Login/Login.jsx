@@ -1,9 +1,12 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import { AuthContext } from "../AuthContext/AuthContext";
 import { Link } from "react-router";
+import { FaEyeSlash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 
 const Login = () => {
-  const {LogInWithGoogle,setUser}=use(AuthContext)
+    const [show,setShow]=useState(true)
+  const { LogInWithGoogle, setUser, loginWithemail } = use(AuthContext);
   const handleLoginWithGoogle = () => {
     LogInWithGoogle()
       .then((res) => {
@@ -15,32 +18,60 @@ const Login = () => {
       });
     console.log("clicked");
   };
-  return (
-    
 
+  const handleLoginWithEmail = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    loginWithemail(email, password)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  return (
     <div className="hero bg-base-200 min-h-screen">
-    
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <div className="card-body">
-            <h1 className="text-center font-bold text-2xl">LogIn</h1>
+      <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+        <div className="card-body">
+          <h1 className="text-center font-bold text-2xl">LogIn</h1>
+          <form onSubmit={handleLoginWithEmail}>
             <fieldset className="fieldset">
               <label className="label">Email</label>
-              <input type="email" className="input" placeholder="Email" />
-              <label className="label">Password</label>
-              <input type="password" className="input" placeholder="Password" />
-              <div></div>
-              <button  className="btn btn-neutral mt-4">Login</button>
-              <button
-                onClick={handleLoginWithGoogle}
-                className="btn btn-neutral mt-4"
-              >
-                LogIn With Google
-              </button>
-              <button className="btn btn-neutral mt-4"><Link to='/register'>Register</Link></button>
+              <input name="email" type="email" className="input" placeholder="Email" />
+              {/* <label className="label">Password</label>
+              <input name="password" type="password" className="input" placeholder="Password" /> */}
+              <div>
+                 <div className='relative'>
+                            <label className="label">Password</label>
+                          <input name='password' type={show?"password"
+                
+                 : "text"
+                
+                } className="input" placeholder="Password" />
+                          <p onClick={()=>setShow(!show)} className='absolute top-8 right-6'>{show?<FaEyeSlash />
+                
+                 : <FaEye />
+                
+                }</p>
+                          </div>
+              </div>
+              <button className="btn btn-neutral mt-4">Login</button>
             </fieldset>
-          </div>
+          </form>
+          <button
+            onClick={handleLoginWithGoogle}
+            className="btn btn-neutral mt-4"
+          >
+            LogIn With Google
+          </button>
+          <button className="btn btn-neutral mt-4">
+            <Link to="/register">Register</Link>
+          </button>
         </div>
-
+      </div>
     </div>
   );
 };
