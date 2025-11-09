@@ -1,16 +1,44 @@
-import React from 'react';
+import React, { use } from 'react';
 import { Link } from 'react-router';
+import { AuthContext } from '../AuthContext/AuthContext';
 
 const Nav = () => {
+  const {user,logOutGoogle}=use(AuthContext)
+  const handleLogOut=()=>{
+logOutGoogle().then(res=>{
+  console.log(res);
+  
+}).catch(err=>{
+  console.log(err);
+  
+})
+  }
+  console.log(user);
+  
   const links=
   <>
-   <li><a>Home</a></li>
-   <li><a>Browse All</a></li>
+
+     <li className='hover:bg-amber-100'><Link to='/'>Home</Link></li>
+   <li><Link to='browseAll'>Browse All</Link></li>
+   {
+    user && <>
+    <li><Link to='/myHabit'>My Habit</Link></li>
+   <li><Link to='/addHabit'>Add Habit</Link></li>
+    </>
+   }
+ 
   </>
   const userLinks=<>
-   <li><a>Name</a></li>
-            <li><a>Email</a></li>
-            <li><a>LogOut</a></li>
+   {user? <>
+      <li><a>Name</a></li>
+      <li><a>Email</a></li>
+      <li onClick={handleLogOut}><a>LogOut</a></li> </>
+  
+   :
+    // <button>logout</button>
+    null
+
+   }
   </>
     return (
         <div className="navbar bg-base-100 shadow-sm">
@@ -40,8 +68,10 @@ const Nav = () => {
     
       <li>
         <details>
-          <summary><Link to='/login'>LogIn</Link></summary>
-          <ul className="p-2">
+          <summary><Link to='/login'>{
+user?<button className=''><img className='w-12 h-12 rounded-full' src="https://lh3.googleusercontent.com/a/ACg8ocLsZ9mGJlENe7WIefOmyFuFmR0M9QK7tujrsDAqKfYJVwhljp7T=s96-c" alt="" /></button>: <button>LogIn</button> 
+}</Link></summary>
+          <ul className="p-2 bg-cyan-300 font-semibold">
            {userLinks}
           </ul>
         </details>

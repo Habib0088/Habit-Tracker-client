@@ -1,9 +1,10 @@
 import React, { use } from "react";
 import { AuthContext } from "../AuthContext/AuthContext";
+import { Link } from "react-router";
 
 const Login = () => {
   const {LogInWithGoogle,setUser}=use(AuthContext)
- const handleLoginWithGoogle = () => {
+  const handleLoginWithGoogle = () => {
     LogInWithGoogle()
       .then((res) => {
         console.log(res.user);
@@ -35,7 +36,7 @@ const Login = () => {
               >
                 LogIn With Google
               </button>
-              <button className="btn btn-neutral mt-4">Register</button>
+              <button className="btn btn-neutral mt-4"><Link to='/register'>Register</Link></button>
             </fieldset>
           </div>
         </div>
