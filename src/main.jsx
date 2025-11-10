@@ -12,9 +12,10 @@ import AuthProvider from './assets/component/AuthProvider/AuthProvider.jsx';
 import BrowseAll from './assets/component/BrowseAll/BrowseAll.jsx';
 import PrivateRoute from './assets/component/PrivateRoute/PrivateRoute.jsx';
 import AddHabit from './assets/component/AddHabit/AddHabit.jsx';
-import MyHabit from './assets/component/MyHabit/MyHabit.jsx';
+import Details from './assets/component/Details/Details.jsx';
 import Error from './assets/component/Error/Error.jsx';
 import Register from './assets/component/Register/Register.jsx';
+import MyHabit from './assets/component/MyHabit/MyHabit.jsx';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,9 @@ const router = createBrowserRouter([
       },{
         path:'/register',
         Component:Register
+      },{
+        path:'/details/:id',
+        element:<PrivateRoute><Details></Details></PrivateRoute>
       }
     ]
   },

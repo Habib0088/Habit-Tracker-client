@@ -1,10 +1,13 @@
 import React, { use, useState } from "react";
 import { AuthContext } from "../AuthContext/AuthContext";
+  import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from "react-router";
 
 const AddHabit = () => {
   const [reminderTime, setReminderTime] = useState(""); // state for time
-
+ const notify = () => toast("Congratulation 😍 Your Data Has Added");
   const { user } = use(AuthContext);
+  // const navigator=useNavigate()
   const handleAddHabit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -15,11 +18,30 @@ const AddHabit = () => {
       category: form.category.value,
       reminderTime,
       Upload_image:form.uploadImage.value,
-      Email:form.email.value,
+      Created_at:new Date(),
+      Created_by:form.email.value,
       Name:form.name.value
     };
     console.log("clicked",formData);
+
+    // fetch('',{}=>{
+
+    // })
     
+    fetch('http://localhost:3000/habit',{
+        method:"POST",
+        headers:{
+            'content-type':'application/json'
+        },
+        body:JSON.stringify(formData)
+    }).then(res=>res.json()).then(data=>{
+        console.log(data);
+        form.reset()
+        if(data.insertedId){
+notify()
+        }
+        
+    })
     // const name=
   };
   return (
@@ -94,6 +116,8 @@ const AddHabit = () => {
           </div>
         </div>
       </div>
+              <ToastContainer />
+
     </div>
   );
 };

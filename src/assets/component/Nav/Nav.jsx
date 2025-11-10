@@ -4,7 +4,7 @@ import { AuthContext } from '../AuthContext/AuthContext';
 
 const Nav = () => {
   const {user,logOutGoogle}=use(AuthContext)
-  console.log(user);
+
   
   const handleLogOut=()=>{
 logOutGoogle().then(res=>{
@@ -15,7 +15,7 @@ logOutGoogle().then(res=>{
   
 })
   }
-  console.log(user);
+
   
   const links=
   <>
