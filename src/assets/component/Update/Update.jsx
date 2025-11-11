@@ -1,10 +1,14 @@
 import React, { use, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 import { AuthContext } from "../AuthContext/AuthContext";
-  import { ToastContainer, toast } from 'react-toastify';
+import { useParams } from "react-router";
 
-const AddHabit = () => {
+const Update = () => {
+  const { id } = useParams();
+  console.log(id);
+
   const [reminderTime, setReminderTime] = useState(""); // state for time
- const notify = () => toast("Congratulation 😍 Your Data Has Added");
+  const notify = () => toast("Congratulation 😍 Your Data Upadated Successfully");
   const { user } = use(AuthContext);
   // const navigator=useNavigate()
   const handleAddHabit = (e) => {
@@ -16,31 +20,32 @@ const AddHabit = () => {
       Description: form.description.value,
       category: form.category.value,
       reminderTime,
-      Upload_image:form.uploadImage.value,
-      Created_at:new Date(),
-      Created_by:form.email.value,
-      Name:form.name.value
+      Upload_image: form.uploadImage.value,
+      Created_at: new Date(),
+
+      Name: form.name.value,
     };
-    console.log("clicked",formData);
+    console.log("clicked", formData);
 
     // fetch('',{}=>{
 
     // })
-    
-    fetch('http://localhost:3000/habit',{
-        method:"POST",
-        headers:{
-            'content-type':'application/json'
-        },
-        body:JSON.stringify(formData)
-    }).then(res=>res.json()).then(data=>{
-        console.log(data);
-        form.reset()
-        if(data.insertedId){
-notify()
-        }
-        
+
+    fetch(`http://localhost:3000/update/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(formData),
     })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        form.reset();
+        if (data.modifiedCount) {
+          notify();
+        }
+      });
     // const name=
   };
   return (
@@ -48,7 +53,7 @@ notify()
       <div className=" flex-col lg:flex-row-reverse">
         <div className="card bg-base-100 w-full shadow-2xl">
           <div className="card-body">
-            <h1>Add Your Habit</h1>
+            <h1 className="text-center font-bold text-2xl">Update Now !!</h1>
             <form onSubmit={handleAddHabit}>
               <fieldset className="fieldset w-[300px]">
                 <label className="label">Habit Title</label>
@@ -115,13 +120,9 @@ notify()
           </div>
         </div>
       </div>
-              <ToastContainer />
-
+      <ToastContainer />
     </div>
   );
 };
 
-export default AddHabit;
-
-// db: Habit-tracker
-// password:ufOk6srAY6jKcfnb
+export default Update;

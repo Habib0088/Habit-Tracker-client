@@ -1,6 +1,7 @@
 import React, { use } from 'react';
-import { Link } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../AuthContext/AuthContext';
+import './nav.css'
 
 const Nav = () => {
   const {user,logOutGoogle}=use(AuthContext)
@@ -21,11 +22,12 @@ logOutGoogle().then(res=>{
   <>
 
      <li className='hover:bg-amber-100'><Link to='/'>Home</Link></li>
-   <li><Link to='browseAll'>Browse All</Link></li>
+   <li><NavLink to='browseAll'>Browse All</NavLink></li>
    {
     user && <>
-    <li><Link to='/myHabit'>My Habit</Link></li>
-   <li><Link to='/addHabit'>Add Habit</Link></li>
+    <li><NavLink to='/myHabit'>My Habit</NavLink></li>
+   <li><NavLink to='/addHabit'>Add Habit</NavLink></li>
+   
     </>
    }
  
@@ -78,7 +80,7 @@ logOutGoogle().then(res=>{
 user?<button className=''><img className='w-12 h-12 rounded-full' src={user?.photoURL
 } alt="Photo" /></button>: null
 }</summary>
-          <ul className="p-2 bg-cyan-300 font-semibold -m-36 mt-4">
+          <ul className="p-2 bg-cyan-300 font-semibold -m-36 mt-4 z-40">
            {userLinks}
           </ul>
         </details>

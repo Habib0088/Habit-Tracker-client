@@ -16,6 +16,7 @@ import Details from './assets/component/Details/Details.jsx';
 import Error from './assets/component/Error/Error.jsx';
 import Register from './assets/component/Register/Register.jsx';
 import MyHabit from './assets/component/MyHabit/MyHabit.jsx';
+import Update from './assets/component/Update/Update.jsx';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       },{
         path:'/details/:id',
         element:<PrivateRoute><Details></Details></PrivateRoute>
+      },{
+        path:'/update/:id',
+        element:<PrivateRoute><Update></Update></PrivateRoute>,
+
       }
     ]
   },
