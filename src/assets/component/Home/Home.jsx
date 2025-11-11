@@ -1,22 +1,35 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { AuthContext } from '../AuthContext/AuthContext';
 
 const Home = () => {
   const [habitData, setHabitData] = useState([]);
-  const {user}=use(AuthContext)
+  const [loading, setLoading] = useState(false);
+  const { user } = React.useContext(AuthContext);
 
   useEffect(() => {
-    fetch('http://localhost:3000/habit')
-      .then(res => res.json())
-      .then(data => setHabitData(data))
-      .catch(err => console.log(err));
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch('http://localhost:3000/habit');
+        const data = await res.json();
+        setHabitData(data);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
   }, []);
+
+  if (loading) {
+    return <h1 className='text-2xl text-center font-bold py-20 '>Loading.........</h1>;
+  }
 
   return (
     <div className="max-w-11/12 mx-auto overflow-x-auto">
       <table className="table">
-        {/* Table Header - rendered only once */}
         <thead>
           <tr>
             <th>#</th>
@@ -26,8 +39,6 @@ const Home = () => {
             <th>Action</th>
           </tr>
         </thead>
-
-        {/* Table Body - rows repeated for each habit */}
         <tbody>
           {habitData.map((habit, index) => (
             <tr key={habit._id}>
@@ -47,16 +58,15 @@ const Home = () => {
               <td>{habit.Description}</td>
               <td>{habit.category}</td>
               <td>
-               {
-                user?
-                 <Link to={`/details/${habit._id}`}>
-                  <button className="btn p-2 bg-cyan-400 text-2xl">Details</button>
-                </Link>
-                :
-                <Link to={'/login'}>
-                  <button className="btn p-2 bg-cyan-400 text-2xl">Details</button>
-                </Link>
-               }
+                {user ? (
+                  <Link to={`/details/${habit._id}`}>
+                    <button className="btn p-2 bg-cyan-400 text-2xl">Details</button>
+                  </Link>
+                ) : (
+                  <Link to={'/login'}>
+                    <button className="btn p-2 bg-cyan-400 text-2xl">Details</button>
+                  </Link>
+                )}
               </td>
             </tr>
           ))}

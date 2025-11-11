@@ -1,50 +1,65 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../AuthContext/AuthContext";
-import { data, Link } from "react-router";
-import { toast, ToastContainer } from "react-toastify";
+import { Link } from "react-router";
+import Swal from "sweetalert2";
 
 const MyHabit = () => {
-  const { user } = use(AuthContext);
+  const { user } = useContext(AuthContext);
   const [habitData, setHabitData] = useState([]);
-  const notify = () => toast("Congratulation 😍 Your Data Has Added");
-  console.log(habitData);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user?.email) return; // wait until user loads
+    if (!user?.email) return;
+    setLoading(true);
     fetch(`http://localhost:3000/habitByEmail?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setHabitData(data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
   }, [user]);
 
   const handleDelete = (id) => {
-    console.log(id);
-
-    fetch(`http://localhost:3000/delete/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.deletedCount > 1) {
-          notify();
-        }
-        console.log(data);
-      });
-      const filteredData=habitData.filter(singleHabit=>singleHabit._id!== id)
-      setHabitData(filteredData)
-      console.log(filteredData);
-      
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/delete/${id}`, { method: "DELETE" })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              // Remove deleted habit from frontend state
+              setHabitData(habitData.filter((habit) => habit._id !== id));
+              Swal.fire("Deleted!", "Your habit has been deleted.", "success");
+            }
+          })
+          .catch((err) => console.log(err));
+      }
+    });
   };
+
+  if (loading) {
+    return (
+      <h1 className="text-2xl font-bold text-center py-20">
+        Loading.........
+      </h1>
+    );
+  }
+
   return (
     <div className="w-full px-4 py-6">
       <div className="overflow-x-auto">
         <table className="table w-full border border-gray-200">
-          {/* Table Header */}
           <thead className="bg-gray-100 text-sm md:text-base">
             <tr>
               <th>#</th>
@@ -55,8 +70,6 @@ const MyHabit = () => {
               <th>Action</th>
             </tr>
           </thead>
-
-          {/* Table Body */}
           <tbody className="text-sm md:text-base">
             {habitData.map((habit, index) => (
               <tr key={habit._id} className="hover:bg-gray-50">
@@ -71,7 +84,7 @@ const MyHabit = () => {
                     <span className="font-semibold">{habit.Habit_title}</span>
                   </div>
                 </td>
-                <td className="w-[400px]"> {habit.Description}</td>
+                <td className="w-[400px]">{habit.Description}</td>
                 <td>{habit.category}</td>
                 <td>{new Date(habit.Created_at).toLocaleDateString()}</td>
                 <td className="flex flex-wrap gap-2">
@@ -95,7 +108,6 @@ const MyHabit = () => {
           </tbody>
         </table>
       </div>
-      <ToastContainer />
     </div>
   );
 };

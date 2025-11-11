@@ -6,7 +6,7 @@ import { FaEye } from "react-icons/fa";
 
 const Login = () => {
     const [show,setShow]=useState(true)
-  const { LogInWithGoogle, setUser, loginWithemail } = use(AuthContext);
+  const { LogInWithGoogle, setUser, loginWithemail,loading,setLoading } = use(AuthContext);
   const navigator=useNavigate()
   const handleLoginWithGoogle = () => {
     LogInWithGoogle()
@@ -29,14 +29,20 @@ const Login = () => {
     const password = e.target.password.value;
 
     loginWithemail(email, password)
+    setLoading(true)
       .then((res) => {
         console.log(res);
+        setLoading(false)
 
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false)
       });
   };
+  // if(loading){
+  //   return <h1 className="text-2xl font-bold text-center"> Loading ........</h1>
+  // }
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -63,7 +69,7 @@ const Login = () => {
                 }</p>
                           </div>
               </div>
-              <button className="btn btn-neutral mt-4">Login</button>
+              <button className="btn btn-neutral mt-4">{loading? "Logging in..." : "Login"}</button>
             </fieldset>
           </form>
           <button
