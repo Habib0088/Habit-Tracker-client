@@ -35,8 +35,10 @@ const MyHabit = () => {
         }
         console.log(data);
       });
-      const filteredData=habitData.filter(singleHabit=>singleHabit._id!== data._id)
+      const filteredData=habitData.filter(singleHabit=>singleHabit._id!== id)
       setHabitData(filteredData)
+      console.log(filteredData);
+      
   };
   return (
     <div className="w-full px-4 py-6">
