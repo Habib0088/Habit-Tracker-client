@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../AuthContext/AuthContext";
 
 const BrowseAll = () => {
+    const{user,setUser}=use(AuthContext)
   const [habitData, setHabitData] = useState([]);
 
   useEffect(() => {
@@ -30,9 +32,24 @@ const BrowseAll = () => {
               <p ><span className="font-semibold">Time:</span> {new Date(data?.Created_at).toDateString()}</p>
               <div className="card-actions justify-end">
                
-            <Link to={`/details/${data._id}`}>
+            {/* <Link to={`/details/${data._id}`}>
+                  <button className="btn p-2 bg-cyan-400 text-2xl">Details</button>
+                </Link> */}
+
+{
+    user?
+     <Link to={`/details/${data._id}`}>
                   <button className="btn p-2 bg-cyan-400 text-2xl">Details</button>
                 </Link>
+    
+    :
+     <Link to={'/login'}>
+                  <button className="btn p-2 bg-cyan-400 text-2xl">Details</button>
+                </Link>
+    
+}
+
+                
 
               </div>
             </div>

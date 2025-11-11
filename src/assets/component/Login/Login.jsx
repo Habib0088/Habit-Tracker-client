@@ -1,16 +1,20 @@
 import React, { use, useState } from "react";
 import { AuthContext } from "../AuthContext/AuthContext";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 
 const Login = () => {
     const [show,setShow]=useState(true)
   const { LogInWithGoogle, setUser, loginWithemail } = use(AuthContext);
+  const navigator=useNavigate()
   const handleLoginWithGoogle = () => {
     LogInWithGoogle()
       .then((res) => {
         console.log(res.user);
+        if(res.user){
+          navigator('/')
+        }
         setUser(res.user);
       })
       .catch((error) => {
@@ -27,6 +31,7 @@ const Login = () => {
     loginWithemail(email, password)
       .then((res) => {
         console.log(res);
+
       })
       .catch((err) => {
         console.log(err);

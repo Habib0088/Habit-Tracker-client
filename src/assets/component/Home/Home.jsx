@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { Link } from 'react-router';
+import { AuthContext } from '../AuthContext/AuthContext';
 
 const Home = () => {
   const [habitData, setHabitData] = useState([]);
+  const {user}=use(AuthContext)
 
   useEffect(() => {
     fetch('http://localhost:3000/habit')
@@ -45,9 +47,16 @@ const Home = () => {
               <td>{habit.Description}</td>
               <td>{habit.category}</td>
               <td>
-                <Link to={`/details/${habit._id}`}>
+               {
+                user?
+                 <Link to={`/details/${habit._id}`}>
                   <button className="btn p-2 bg-cyan-400 text-2xl">Details</button>
                 </Link>
+                :
+                <Link to={'/login'}>
+                  <button className="btn p-2 bg-cyan-400 text-2xl">Details</button>
+                </Link>
+               }
               </td>
             </tr>
           ))}
