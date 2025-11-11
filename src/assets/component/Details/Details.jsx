@@ -19,8 +19,8 @@ const Details = () => {
   }, [id]);
   return (
     <div className="card card-side bg-base-100 shadow-sm lg:w-5/12 mx-auto lg:mt-7">
-      <figure>
-        <img className="w-[500px] h-[300px]"
+      <figure >
+        <img className="w-[400px] h-[200px] p-2 rounded-2xl"
           src={detailsData?.Upload_image}
           alt="Movie"
         />
