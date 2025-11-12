@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { AuthContext } from '../AuthContext/AuthContext';
 
+
+import { motion } from "framer-motion";
+
+
 const Home = () => {
   const [habitData, setHabitData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -26,9 +30,21 @@ const Home = () => {
   if (loading) {
     return <h1 className='text-2xl text-center font-bold py-20 '>Loading.........</h1>;
   }
-
+const animation={
+   initial:{opacity:0, y:50},
+    animate:{opacity:1, y:0},
+    transition:{duration: 0.8},
+}
   return (
-    <div className="max-w-11/12 mx-auto overflow-x-auto">
+    <>
+    <motion.div
+    variants={animation}
+
+    initial='initial'
+    animate='animate'
+    transition='transition'
+    >
+ <div className="max-w-11/12 mx-auto overflow-x-auto">
       <table className="table">
         <thead>
           <tr>
@@ -73,6 +89,10 @@ const Home = () => {
         </tbody>
       </table>
     </div>
+    </motion.div>
+   
+    </>
+    
   );
 };
 
