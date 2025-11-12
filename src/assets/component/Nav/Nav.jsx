@@ -21,7 +21,7 @@ logOutGoogle().then(res=>{
   const links=
   <>
 
-     <li className='hover:bg-amber-100'><Link to='/'>Home</Link></li>
+     <li className='hover:bg-amber-100'><NavLink to='/'>Home</NavLink></li>
    <li><NavLink to='browseAll'>Browse All</NavLink></li>
    {
     user && <>
@@ -81,6 +81,7 @@ user?<button className=''><img className='w-12 h-12 rounded-full' src={user?.pho
 } alt="Photo" /></button>: null
 }</summary>
           <ul className="p-2 bg-cyan-300 font-semibold -m-36 mt-4 z-40">
+            
            {userLinks}
           </ul>
         </details>
