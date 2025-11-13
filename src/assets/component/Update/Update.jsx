@@ -94,6 +94,7 @@ const Update = () => {
                   type="Text"
                   className="input"
                   placeholder="Description"
+                  
                 />
                 {/* User name */}
                 <label className="label">User Email</label>

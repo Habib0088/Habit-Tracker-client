@@ -36,7 +36,7 @@ const Home = () => {
     e.preventDefault()
     const data=e.target.search.value
     // console.log(data);
-    fetch(`https://habittracker-teal.vercel.app/ search?search=${data}`).then(res=>res.json()).then(data=>{
+    fetch(`https://habittracker-teal.vercel.app/search?search=${data}`).then(res=>res.json()).then(data=>{
       console.log(data);
       setHabitData(data)
       

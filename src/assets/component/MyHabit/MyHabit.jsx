@@ -34,7 +34,7 @@ const MyHabit = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://habittracker-teal.vercel.app/ delete/${id}`, { method: "DELETE" })
+        fetch(`https://habittracker-teal.vercel.app/delete/${id}`, { method: "DELETE" })
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
