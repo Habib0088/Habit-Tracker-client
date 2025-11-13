@@ -11,7 +11,7 @@ const MyHabit = () => {
   useEffect(() => {
     if (!user?.email) return;
     setLoading(true);
-    fetch(`http://localhost:3000/habitByEmail?email=${user.email}`)
+    fetch(`https://habittracker-teal.vercel.app/habitByEmail?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setHabitData(data);
@@ -34,7 +34,7 @@ const MyHabit = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/delete/${id}`, { method: "DELETE" })
+        fetch(`https://habittracker-teal.vercel.app/ delete/${id}`, { method: "DELETE" })
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {

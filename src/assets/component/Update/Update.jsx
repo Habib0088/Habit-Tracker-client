@@ -31,7 +31,7 @@ const Update = () => {
 
     // })
 
-    fetch(`http://localhost:3000/update/${id}`, {
+    fetch(`https://habittracker-teal.vercel.app/update/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

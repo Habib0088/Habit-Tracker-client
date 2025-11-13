@@ -27,7 +27,7 @@ const AddHabit = () => {
 
     // })
     
-    fetch('http://localhost:3000/habit',{
+    fetch('https://habittracker-teal.vercel.app/habit',{
         method:"POST",
         headers:{
             'content-type':'application/json'
@@ -56,14 +56,14 @@ notify()
                   name="habitTitle"
                   type="Text"
                   className="input"
-                  placeholder="Description"
+                  placeholder="Habit Title"
                 />
                 <label className="label">Description</label>
                 <input
                   name="description"
                   type="text"
                   className="input"
-                  placeholder="Password"
+                  placeholder="Description"
                 />
                 <label className="label">Category</label>
                 {/* Category */}
@@ -88,7 +88,7 @@ notify()
                   name="uploadImage"
                   type="Text"
                   className="input"
-                  placeholder="Description"
+                  placeholder="Image Link"
                 />
                 {/* User name */}
                 <label className="label">User Email</label>
@@ -98,7 +98,7 @@ notify()
                   name="email"
                   type="Text"
                   className="input"
-                  placeholder="Description"
+                  placeholder="User Email"
                 />
                 <label className="label">Name</label>
                 <input
@@ -107,7 +107,7 @@ notify()
                   name="name"
                   type="Text"
                   className="input"
-                  placeholder="Description"
+                  placeholder="Name"
                 />
                 <button className="btn btn-neutral mt-4">Add</button>
               </fieldset>

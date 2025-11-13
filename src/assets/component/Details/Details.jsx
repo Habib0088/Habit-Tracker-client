@@ -7,7 +7,7 @@ const Details = () => {
   console.log(id);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/habit/${id}`)
+    fetch(`https://habittracker-teal.vercel.app/habit/${id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

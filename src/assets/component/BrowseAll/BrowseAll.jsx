@@ -9,7 +9,7 @@ const BrowseAll = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/browseAll")
+    fetch("https://habittracker-teal.vercel.app/browseAll")
       .then((res) => res.json())
       .then((data) => {
         setHabitData(data);

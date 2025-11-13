@@ -17,7 +17,7 @@ const Home = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await fetch("http://localhost:3000/habit");
+        const res = await fetch("https://habittracker-teal.vercel.app/habit");
         const data = await res.json();
         setHabitData(data);
       } catch (err) {
@@ -32,11 +32,49 @@ const Home = () => {
   if (loading) {
     return <h1 className="text-2xl text-center font-bold py-20">Loading...</h1>;
   }
-
+  const handleForm=(e)=>{
+    e.preventDefault()
+    const data=e.target.search.value
+    // console.log(data);
+    fetch(`https://habittracker-teal.vercel.app/ search?search=${data}`).then(res=>res.json()).then(data=>{
+      console.log(data);
+      setHabitData(data)
+      
+    })
+    
+  }
   return (
     <div>
+        <div>
+             {/* SERCH INPUT ---------------------- */}
+              <form className="right-2" onSubmit={handleForm}>
+                <label className="input ">
+                  <svg
+                    className="h-[1em] opacity-50"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                  >
+                    <g
+                      strokeLinejoin="round"
+                      strokeLinecap="round"
+                      strokeWidth="2.5"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <path d="m21 21-4.3-4.3"></path>
+                    </g>
+                  </svg>
+                  <input type="search" name="search" required placeholder="Search" />
+                  <button className="btn w-[90px]">Search</button>
+                </label>
+              </form>
+        
+              {/*  SErach end here */}
+      </div>
       <div className="w-11/12 mx-auto mt-5">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+    
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-16">
           {habitData.map((habit, index) => (
             <motion.div
               key={habit._id}
