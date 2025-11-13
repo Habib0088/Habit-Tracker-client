@@ -6,6 +6,7 @@ import HeroBanner from "../HeroBanner/HeroBanner";
 import Exercise from "../Exercise/Exercise";
 import Benefit from "../Benefit/Benefit";
 
+
 const Home = () => {
   const [habitData, setHabitData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -81,6 +82,7 @@ const Home = () => {
         </div>
         <div>{/* <HeroSliderComponent></HeroSliderComponent> */}</div>
       </div>
+      {/* <Slider></Slider> */}
       <HeroBanner></HeroBanner>
       <Exercise></Exercise>
       <Benefit></Benefit>
