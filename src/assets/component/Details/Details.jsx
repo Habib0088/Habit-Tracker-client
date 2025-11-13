@@ -18,7 +18,7 @@ const Details = () => {
       });
   }, [id]);
   return (
-    <div className="card card-side bg-base-100 shadow-sm lg:w-5/12 mx-auto lg:mt-7">
+    <div className="card card-side bg-base-100 shadow-sm lg:w-5/12 mx-auto lg:mt-7 shadow-2xl my-7">
       <figure >
         <img className="w-[400px] h-[200px] p-2 rounded-2xl"
           src={detailsData?.Upload_image}
@@ -40,16 +40,3 @@ const Details = () => {
 
 export default Details;
 
-//  const {id}=useParams()
-//     console.log(id);
-
-//     useEffect(()=>{
-
-//         fetch(`http://localhost:3000/habit/${id}`).then(res=>res.json()).then(data=>{
-//             console.log(data);
-
-//         }).catch(err=>{
-//             console.log(err);
-
-//         })
-//     },[id])
