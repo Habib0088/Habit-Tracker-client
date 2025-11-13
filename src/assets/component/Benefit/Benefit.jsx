@@ -2,8 +2,8 @@ import React from "react";
 
 const Benefit = () => {
   return (
-   <div>
-      <div className="container w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:py-6 lg:py-20 gap-4 bg-[url('https://i.ibb.co.com/prKNYqrn/2151001608.jpg')] ">
+   <div className="bg-[url('https://i.ibb.co.com/prKNYqrn/2151001608.jpg')]">
+      <div className="container w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:py-6 lg:py-20 gap-4  ">
         <div className="card bg-base-100 image-full  shadow-sm hover:scale-101 transition duration-300 ease-in-out hover:shadow-2xl ">
           <figure>
             <img
