@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import HeroBanner from "../HeroBanner/HeroBanner";
 import Exercise from "../Exercise/Exercise";
 import Benefit from "../Benefit/Benefit";
+import Slider from "../Slider/Slider";
 
 
 const Home = () => {
@@ -82,7 +83,7 @@ const Home = () => {
         </div>
         <div>{/* <HeroSliderComponent></HeroSliderComponent> */}</div>
       </div>
-      {/* <Slider></Slider> */}
+      <Slider></Slider>
       <HeroBanner></HeroBanner>
       <Exercise></Exercise>
       <Benefit></Benefit>
