@@ -60,7 +60,7 @@ logOutGoogle().then(res=>{
         }
       </ul>
     </div>
-    <a className="btn btn-ghost text-sm lg:text-xl font-extrabold">Habit Tracker</a>
+    <Link to='/'><h1 className=" text-sm lg:text-xl font-extrabold"><img className='w-[50px] h-[50px] rounded-full' src="https://i.ibb.co.com/xqXhsV8j/logo2.png" alt="" /></h1></Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1 mr-6">
