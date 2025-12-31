@@ -1,16 +1,42 @@
-# React + Vite
+# Website Name:-  Habit-Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Site:**  https://regal-meerkat-b9a22f.netlify.app/
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ Habit-Tracker is a modern Habit management web application designed for users, contest creators, and admins. It offers a fully responsive experience on mobile, tablet, and desktop devices. 
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 1**Responsive Design:** Fully responsive UI for Home and all pages across devices.
+- 2**Private Routes:** Users remain logged in after page refresh with secure JWT authentication.
+- 3**Environment Variables:** Firebase and MongoDB secrets are securely hidden using environment variables.
+- 4**Sweet Alerts & Toasts:** Used for login, signup, CRUD actions, and notifications.
+- 5**TanStack Query:** All data fetching is managed with TanStack Query for efficiency and caching.
+- 6**404 Not Found Page:** User-friendly error page with navigation back to home.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React.js
+- Firebase Authentication
+- MongoDB & Node.js (Backend)
+- React Router DOM
+- SweetAlert2 , Toast
+- JWT Authentication
+- React Datepicker
+- Tailwind CSS
+- 
+=>Steps to Run Locally:
+
+1.Clone the repo:
+2.Install dependencies:
+
+3.Set up environment variables:
+Create a .env file with your Firebase config.
+
+Start the app:
+npm start
+Open in browser:
+http://localhost:3000
+<img width="1366" height="591" alt="Habittracker" src="https://github.com/user-attachments/assets/723aba10-0575-4332-8db9-6ce3db622bfe" />
+
